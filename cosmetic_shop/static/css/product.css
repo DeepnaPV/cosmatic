@@ -1,0 +1,34 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+.main {
+    display: flex; /* Set to flex to position children in a row */
+    height: 100vh;
+    width: 100%;
+}
+
+.side {
+    /* width: 30%; Sidebar takes 30% of the width */
+    background-color: aquamarine;
+    padding: 20px; /* Padding for spacing */
+    order: 1; /* Change order to place sidebar on the right */
+}
+
+.cont {
+    /* width: 70%; Main content takes 70% of the width */
+    background-color: bisque;
+    padding: 20px; /* Padding for spacing */
+    overflow-y: auto; /* Allow scrolling if content exceeds height */
+    order: 0; /* Default order for main content */
+}
+
+.form-label {
+    font-weight: bold;
+}

@@ -1,0 +1,11 @@
+.navbar .navbar-nav .nav-link {
+    color: #ffffff; /* Change to your desired color */
+}
+
+.navbar .navbar-nav .nav-link.active {
+    color: #00ff00; /* Active link color */
+}
+
+.navbar .navbar-nav .nav-link[aria-disabled="true"] {
+    color: #cccccc; /* Disabled link color */
+}

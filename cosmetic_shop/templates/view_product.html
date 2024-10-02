@@ -1,0 +1,9 @@
+<h1>{{ product.name }}</h1>
+<p>Stock: {{ product.stock }}</p>
+<p>Price: ${{ product.price }}</p>
+
+{% if product.stock > 0 %}
+    <a href="{% url 'purchase_product' product.id %}">Purchase</a>
+{% else %}
+    <p>Out of stock</p>
+{% endif %}

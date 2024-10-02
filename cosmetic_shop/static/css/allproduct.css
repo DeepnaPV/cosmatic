@@ -1,0 +1,30 @@
+
+        .datatable-container {
+            margin-top: 20px;
+            background-color: #f8f9fa; 
+            border-radius: 5px; 
+            overflow: hidden; 
+        }
+        .datatable-header {
+            background-color: #007bff; 
+            color: white; 
+        }
+        .datatable-pagination-list {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            padding: 0;
+        }
+        .datatable-pagination-list-item {
+            margin: 0 5px;
+        }
+        .datatable-pagination-list-item button {
+            border: none;
+            background-color: transparent;
+            color: #007bff;
+            cursor: pointer;
+        }
+        .datatable-pagination-list-item button:hover {
+            text-decoration: underline;
+        } 
+   
