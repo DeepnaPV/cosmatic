@@ -82,7 +82,7 @@ input:focus::placeholder {
     font-size: 20px;
 }
 
-footer {
+.footer {
     width: 100%;
     background-color: pink;
     text-align: center; 

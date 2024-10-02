@@ -5,28 +5,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/imgpro.css'%}">
     <title>Product Details</title>
 </head>
 <body>
     <header>
-        {% include 'header.html' %}
+        {% include 'admin-nav.html' %}
     </header>
-
-    <div class="container mt-3">
+    <div class="container-fluid p-0" style="width: 100%;"></div>
+        <div class="row flex-nowrap" style="height: 100vh;">
+            {% include 'sidebar.html' %}
+            <div class="col py-3">
+                <div class="main container ">
+               <div class="container mt-3">
         <h2>{{ product.name }}</h2>
-        <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid">
+        <img src="{{ product.image.url }}" alt="{{ product.name }}" class="imgpro">
         <p>Stock: {{ product.stock }}</p>
+        <p>Slug: {{ product.slug }}</p>
+        <p>Categories: {{ product.category }}</p>
         <p>Brand: {{ product.brand }}</p>
         <p>Price: {{ product.price }}</p>
+        <p>Discription: {{ product.description  }}</p>
         <a href="{% url 'updatepro' product.id %}" class="btn btn-primary">Edit</a>
         <a href="{% url 'delpro' product.id %}" class="btn btn-danger">Delete</a>
-        <a href="{% url 'allpro' %}" class="btn btn-secondary">Back to Products</a>
     </div>
-
-    <footer>
-        {% include 'footer.html' %}
-    </footer>
-
+</div>
+</div>
+</div>
+<footer>
+    {% include 'admin-footer.html' %}
+</footer>
+  
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
