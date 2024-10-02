@@ -2,3 +2,7 @@
     height: 150px;
     width: 150px;
 }
+.img-fluid {
+    max-height: 400px; /* Set a max height for the image */
+    object-fit: cover; /* Ensures the image covers the space without distortion */
+}

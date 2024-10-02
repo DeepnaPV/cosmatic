@@ -82,11 +82,12 @@ input:focus::placeholder {
     font-size: 20px;
 }
 
-.footer {
+.footers {
     width: 100%;
-    background-color: pink;
+    /* background-color: pink; */
     text-align: center; 
     height: 13%;
+    margin-top: 12px;
 }
 a {
     display: block; 
