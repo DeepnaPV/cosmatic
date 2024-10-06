@@ -1,0 +1,8 @@
+.cont {
+    min-height: 150px; 
+}
+.card {
+    display: flex; /* Use flex to allow the card to grow */
+    flex-direction: column; /* Align items vertically */
+    height: 100%; /* Ensure the card takes full height */
+}

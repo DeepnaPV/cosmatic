@@ -25,28 +25,45 @@
                         <div class="container-fluid cat">
                             <div class="d-flex flex-nowrap justify-content-center overflow-auto">
                                 <div class="p-2">
-                                    <img src="{% static 'img/eyes.jpg' %}" class="custom-image">
+                                    <a href="{% url 'filter_products' %}?category=skincare">
+                                        <img src="{% static 'img/eyes.jpg' %}" class="custom-image">
+                                    </a>
                                 </div>
                                 <div class="p-2">
-                                    <img src="{% static 'img/face.webp' %}" class="custom-image" >
+                                    <a href="{% url 'filter_products' %}?category=makeup">
+                                        <img src="{% static 'img/face.webp' %}" class="custom-image">
+                                    </a>
                                 </div>
                                 <div class="p-2">
-                                    <img src="{% static 'img/fragrance.jpg' %}" class="custom-image" >
+                                    <a href="{% url 'filter_products' %}?category=fragrance">
+                                        <img src="{% static 'img/fragrance.jpg' %}" class="custom-image">
+                                    </a>
                                 </div>
                                 <div class="p-2">
-                                    <img src="{% static 'img/combo.webp' %}" class="custom-image" >
+                                    <a href="{% url 'filter_products' %}?category=combo">
+                                        <img src="{% static 'img/combo.webp' %}" class="custom-image">
+                                    </a>
                                 </div>
                                 <div class="p-2">
-                                    <img src="{% static 'img/lips.webp' %}" class="custom-image" >
+                                    <a href="{% url 'filter_products' %}?category=lips">
+                                        <img src="{% static 'img/lips.webp' %}" class="custom-image">
+                                    </a>
                                 </div>
                                 <div class="p-2">
-                                    <img src="{% static 'img/nails.webp' %}" class="custom-image">
+                                    <a href="{% url 'filter_products' %}?category=nails">
+                                        <img src="{% static 'img/nails.webp' %}" class="custom-image">
+                                    </a>
+                                </div>
+                                <div class="p-2">
+                                    <a href="{% url 'filter_products' %}?category=hair">
+                                        <img src="{% static 'img/hair.jpg' %}" class="custom-image">
+                                    </a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </li>
-                
+                 
                 <li class="nav-item">
                   <a class="nav-link" href="#" style="color: white; font-size: 20px;">SERVICES</a>
               </li>

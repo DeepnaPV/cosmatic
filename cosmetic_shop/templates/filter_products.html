@@ -1,0 +1,60 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/filterpro.css'%}">
+    <title>Filter Products</title>
+</head>
+<body>
+    {% include 'unav.html'%}
+    <div class="container mt-5">
+        <h1 class="text-center">Filter Products by Category</h1>
+        <form method="GET" action="{% url 'filter_products' %}" class="mb-4">
+            <div class="form-group">
+                <select name="category" class="form-control">
+                    <option value="">--Select a Category--</option>
+                    <option value="skincare">Skincare</option>
+                    <option value="makeup">Makeup</option>
+                    <option value="hair">Hair</option>
+                    <option value="fragrance">Fragrance</option>
+                    <option value="tools">Beauty Tools</option>
+                    <option value="bath">Bath and Body</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Filter</button>
+        </form>
+
+        <h2>Products</h2>
+        <div class="row">
+            {% for product in products %}
+            <div class="col-md-3 mb-4"> <!-- Adjust the number for more or fewer columns -->
+                <div class="card">
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="card-img-top" style="height: auto;">
+                    <div class="card-body cont">
+                        <h5 class="card-title mb-0">{{ product.name }}</h5>
+                        <p class="card-text mb-0">Price: ${{ product.price }}</p>
+                        <a href="{% url 'product_detail' product.id %}" class="btn btn-primary mt-2">View</a>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12">
+                <p>No products found in this category.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+     {% include 'ufooter.html'%}
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+
+
+
+
+</html>
