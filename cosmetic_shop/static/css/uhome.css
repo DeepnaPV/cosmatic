@@ -1,0 +1,226 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+.carousel-inner img {
+    height: 600px; /* Adjust this value as needed */
+    object-fit: cover; /* Ensures the image covers the area without distortion */
+}
+.carousel-caption {
+    top: 40%;
+    transform: translateY(-50%);
+    bottom: initial;
+}
+.carousel-inner{
+    display: flex;
+    position: relative;
+    margin: 0 !important;
+}
+.carousel-caption h3{
+    font-size: 32px;
+    font-family: "Great Vibes", cursive;
+    color: #c49b63;
+    text-align: center;
+}
+.carousel-caption h1{
+    text-transform: uppercase;
+    font-size: 42px;
+    color: white;
+    line-height: 1.5;
+    font-weight: normal;
+    letter-spacing: 1px;
+    font-family: "Josefin Sans", Arial, sans-serif;
+}
+.detail {
+    padding: 40px 20px; 
+    background-color: #f9f9f9; 
+    max-width: 600px; 
+    margin: 0 auto; 
+}
+
+.detail-title {
+    font-size: 2.5em; 
+    color: #333; 
+    margin-bottom: 10px; 
+}
+
+.detail-subtitle {
+    font-size: 1.8em; 
+    color: #007BFF;
+    margin-bottom: 10px; 
+}
+
+.detail-description {
+    font-size: 1.1em; 
+    color: #666; 
+    line-height: 1.5;
+}
+.image-slider {
+    position: relative;
+    max-width: 1200px; 
+    margin: auto; 
+    overflow: hidden; 
+}
+
+.container {
+    display: flex;
+    transition: transform 0.5s ease; 
+    width: 100%;
+}
+
+.slider-slide {
+    display: flex; 
+    min-width: 100%; 
+    padding-top: 20px; 
+}
+
+.card {
+    flex: 1 0 21%; 
+    margin-right: 10px;
+    max-width: 18rem; 
+}
+
+.card:last-child {
+    margin-right: 0; 
+}
+
+.card img {
+    width: 100%; 
+    height: auto;
+}
+
+.slider-button {
+    position: absolute;
+    top: 50%; 
+    transform: translateY(-50%); 
+    background-color: rgba(255, 255, 255, 0.7); 
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    font-size: 24px; 
+    z-index: 1; 
+}
+
+.left {
+    left: 10px; 
+}
+
+.right {
+    right: 10px; 
+}
+.gal{
+    margin-top: 10px;
+    margin-left: 0;
+    margin-right: 0;
+    padding: 0px;
+}
+.review {
+    background-image: url('../img/review.jpg');
+    background-size: cover; 
+    background-position: center;
+    height: 100vh; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.carousel-item {
+    display: flex;                 
+    justify-content: center;       
+    align-items: center;          
+    height: 100vh;              
+}
+.content {
+    text-align: center;     
+    max-width: 600px;            
+    padding: 20px;  
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;  
+    margin-top: 170px;         
+}
+.custom-image {
+    height: 150px;  /* Set height to 30 pixels */
+    width: auto;   /* Maintain aspect ratio */
+}
+.sub{
+    background-color: #feebe7;
+}
+.newsletter-section {
+    background: linear-gradient(92deg, rgba(255, 229, 237, 1), rgba(255, 229, 237, 1) 100%);
+    padding: 20px 0;
+}
+
+.section-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.title {
+    font-size: 30px;
+    font-weight: 700;
+    color: #232323;
+    margin-bottom: 10px;
+}
+
+.description {
+    font-size: 20px;
+    font-weight: 700;
+    color: #232323;
+    margin-bottom: 20px;
+}
+
+.section-form-wrapper {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.newsletter-form__field-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.field {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.field__input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.button.newsletter-form__button {
+    padding: 10px 20px;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    color: #000;
+    font-weight: 800;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.button.newsletter-form__button:hover {
+    background-color: #f0f0f0;
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 500px) { 
+    .slider-slide {
+        min-width: 50%; /* Two cards in a row (approximately) */
+    }
+}
+
+@media (max-width: 480px) {
+    .card {
+        flex: 1 0 90%; /* One card per slide on very small screens */
+    }
+}

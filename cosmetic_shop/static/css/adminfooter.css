@@ -1,0 +1,16 @@
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensure body takes full height */
+}
+.main {
+    flex: 1; /* Allow the main content to take up available space */
+    padding-bottom: 60px; /* Add space for the footer */
+}
+footer {
+    position: fixed; /* Fix the footer to the bottom */
+    bottom: 0; /* Align it to the bottom */
+    width: 100%; /* Full width */
+    background-color: #f8f9fa; /* Optional: footer background color */
+    padding: 1 rem;
+}

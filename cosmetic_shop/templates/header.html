@@ -11,13 +11,13 @@
         <div class="collapse navbar-collapse " id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-auto">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#" style="color: white;font-size: 20px;">HOME</a>
+                    <a class="nav-link active" aria-current="page" href="{% url 'main' %}" style="color: white;font-size: 20px;" >HOME</a>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                   <a class="nav-link" href="#" style="color: white; font-size: 20px;">PRODUCTS</a>
-              </li>
+              </li> -->
               <li class="nav-item">
-                <a class="nav-link" href="#" style="color: white; font-size: 20px;">SIGNUP</a>
+                <a class="nav-link" href="{% url 'register' %}" style="color: white; font-size: 20px;">SIGNUP</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#" style="color: white; font-size: 20px;">ABOUT</a>

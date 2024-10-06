@@ -1,0 +1,18 @@
+
+    .dropdown-menu {
+    display: none; /* Hide the dropdown initially */
+    position: absolute; /* Position it correctly */
+    z-index: 10;
+    right: 0;
+    left: auto;
+    transform: translateX(53%);
+}
+
+.nav-item:hover .dropdown-menu {
+    display: block; /* Show the dropdown on hover */
+}
+
+.container-fluid.cat {
+    padding: 10px; /* Optional padding */
+    background-color: white; /* Optional background color */
+}

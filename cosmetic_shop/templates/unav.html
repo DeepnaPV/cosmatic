@@ -1,0 +1,70 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/unav.css'%}">
+<nav class="navbar navbar-expand-lg  bg-dark  fixed-top ;">
+    <div class="container-fluid ">
+      <a class="navbar-brand" href="#">
+        <img
+        src="{% static 'img/logoo.png'%}"
+        height="55"
+        alt="MDB Logo"
+        loading="lazy"
+      />      </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse " id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0  mx-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#" style="color: white;font-size: 20px;">HOME</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" aria-expanded="false" style="color: white; font-size: 20px;">
+                        CATEGORIES
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end">
+                        <div class="container-fluid cat">
+                            <div class="d-flex flex-nowrap justify-content-center overflow-auto">
+                                <div class="p-2">
+                                    <img src="{% static 'img/eyes.jpg' %}" class="custom-image">
+                                </div>
+                                <div class="p-2">
+                                    <img src="{% static 'img/face.webp' %}" class="custom-image" >
+                                </div>
+                                <div class="p-2">
+                                    <img src="{% static 'img/fragrance.jpg' %}" class="custom-image" >
+                                </div>
+                                <div class="p-2">
+                                    <img src="{% static 'img/combo.webp' %}" class="custom-image" >
+                                </div>
+                                <div class="p-2">
+                                    <img src="{% static 'img/lips.webp' %}" class="custom-image" >
+                                </div>
+                                <div class="p-2">
+                                    <img src="{% static 'img/nails.webp' %}" class="custom-image">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                
+                <li class="nav-item">
+                  <a class="nav-link" href="#" style="color: white; font-size: 20px;">SERVICES</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#" style="color: white; font-size: 20px;">BLOG</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" style="color: white; font-size: 20px;">ABOUT</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" style="color: white; font-size: 20px;">SHOP</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" style="color: white; font-size: 20px;">CONTACT US</a>
+      </li>
+     
+
+          </ul>
+        </div>
+    </div>
+</nav>
