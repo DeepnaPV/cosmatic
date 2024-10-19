@@ -43,8 +43,14 @@ def user_login(request):
 
     return render(request, 'ulogin.html')
 
+def about(request):
+    return render(request,'about.html')
+
 def main(request):
     return render(request,'uhome.html')
+
+from django.shortcuts import render
+from inventory.models import products
 
 def filter_products(request):
     # Get all unique categories for the dropdown
@@ -52,20 +58,34 @@ def filter_products(request):
     
     # Get category from URL parameter
     category = request.GET.get('category', None)
-    
+
+    # Get price range from URL parameters
+    min_price = request.GET.get('min_price')
+    max_price = request.GET.get('max_price')
+
+    # Start with all products
+    filtered_products = products.objects.all()
+
     # Filter products based on category
     if category and category != 'all':
-        filtered_products = products.objects.filter(category=category)
-    else:
-        filtered_products = products.objects.all()
+        filtered_products = filtered_products.filter(category=category)
+
+    # Filter products based on price range
+    if min_price:
+        filtered_products = filtered_products.filter(price__gte=min_price)
+    if max_price:
+        filtered_products = filtered_products.filter(price__lte=max_price)
 
     context = {
         'products': filtered_products,
         'categories': categories,
-        'current_category': category
+        'current_category': category,
+        'min_price': min_price,
+        'max_price': max_price,
     }
     
     return render(request, 'filter_products.html', context)
+
 
 def detail(request, id):
     try:
@@ -100,3 +120,44 @@ def view_cart(request):
     else:
         messages.warning(request, "You need to be logged in to view your cart.")
         return redirect('ulogin')
+
+def update_cart(request, product_id):
+    item = get_object_or_404(CartItem, product_id=product_id, user=request.user)
+    
+    if request.method == 'POST':
+        action = request.POST.get('action')
+        if action == 'increment':
+            item.quantity += 1
+            item.save()
+        elif action == 'decrement':
+            if item.quantity > 1:
+                item.quantity -= 1
+                item.save()
+            else:
+                # Optionally, remove the item if quantity reaches zero
+                item.delete()
+    
+    return redirect('view_cart')
+
+def remove_from_cart(request, product_id):
+    item = get_object_or_404(CartItem, product_id=product_id, user=request.user)
+    item.delete()
+    return redirect('view_cart')  # Redirect to the cart page
+
+
+def checkout_view(request, product_id):
+    # Retrieve the product using the provided product_id
+    product = get_object_or_404(products, id=product_id)
+    
+    # Check if the request method is POST for handling form submission
+    if request.method == 'POST':
+        # Handle payment processing here
+        # You can integrate with a payment gateway API
+        # For now, we will just simulate a successful payment
+
+        # After payment processing
+        # Redirect to a success page or render a success template
+        return render(request, 'payment_success.html', {'product': product})
+
+    # If GET request, render the checkout page with the product details
+    return render(request, 'check_out.html', {'product': product})

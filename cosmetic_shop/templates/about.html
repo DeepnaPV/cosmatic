@@ -1,0 +1,114 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Pure Blush</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: #333;
+            line-height: 1.6;
+        }
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            color: #D16587;
+        }
+        .hero {
+            background-image: url('{% static "img/about-hero.jpg" %}');
+            background-size: cover;
+            background-position: center;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 4rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        .section {
+            padding: 5rem 0;
+        }
+        .value-item {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .value-icon {
+            font-size: 3rem;
+            color: #D16587;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        {% include 'unav.html' %}
+    </header>
+
+    <div class="hero">
+        <div class="container">
+            <h1>About Pure Blush</h1>
+            <p class="lead">Empowering Beauty, Naturally</p>
+        </div>
+    </div>
+
+    <main>
+        <section class="section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h2>Our Story</h2>
+                        <p>Founded in 2010, Pure Blush was born from a passion for natural beauty and a commitment to empowering individuals to feel confident in their own skin. Our journey began in a small studio in New York, where our founder, Jane Doe, started crafting small-batch, organic cosmetics.</p>
+                        <p>Today, Pure Blush has grown into a beloved brand, known for our high-quality, cruelty-free products that celebrate the unique beauty in everyone.</p>
+                    </div>
+                    <div class="col-md-6">
+                        <img src="{% static 'img/founder.jpg' %}" alt="Pure Blush Founder" class="img-fluid rounded">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section bg-light">
+            <div class="container">
+                <h2 class="text-center mb-5">Our Values</h2>
+                <div class="row">
+                    <div class="col-md-4 value-item">
+                        <div class="value-icon">🌿</div>
+                        <h3>Natural Ingredients</h3>
+                        <p>We believe in the power of nature. Our products are crafted using only the finest natural and organic ingredients.</p>
+                    </div>
+                    <div class="col-md-4 value-item">
+                        <div class="value-icon">🐰</div>
+                        <h3>Cruelty-Free</h3>
+                        <p>We are committed to ethical beauty. None of our products or ingredients are ever tested on animals.</p>
+                    </div>
+                    <div class="col-md-4 value-item">
+                        <div class="value-icon">♻️</div>
+                        <h3>Sustainability</h3>
+                        <p>We're dedicated to reducing our environmental impact through eco-friendly packaging and responsible sourcing.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <h2 class="text-center mb-5">Our Mission</h2>
+                <p class="lead text-center">At Pure Blush, our mission is to empower individuals to embrace their natural beauty while caring for their skin and the environment. We strive to create products that not only enhance your natural glow but also contribute to a more sustainable and ethical beauty industry.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        {% include 'ufooter.html' %}
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
