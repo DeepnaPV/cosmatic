@@ -5,9 +5,12 @@ from django.conf.urls.static import static
 
 
 urlpatterns=[
+    path('register/',views.register, name='register'),
+    path('login/', views.user_login, name='login'),
     path('uhome',views.main, name='main'),
     path('filter/', views.filter_products, name='filter_products'),
-    path('product/<int:id>/', views.detail, name='product_detail'),
-
+    path('product/<int:product_id>/', views.product_detail, name='product_detail'),
+    path('add_to_cart/<int:product_id>/', views.add_to_cart, name='add_to_cart'),
+    path('cart/', views.view_cart, name='view_cart'),
 ]
 urlpatterns+= static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

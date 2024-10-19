@@ -1,0 +1,22 @@
+body {
+    background-color: #f8f9fa; /* Light background for the page */
+}
+
+.login-card {
+    background-color: #ffffff; /* White background for the login card */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.login-card h1 {
+    margin-bottom: 20px; /* Space below the title */
+    font-size: 24px; /* Font size for the title */
+}
+
+.login-card .form-control {
+    border-radius: 4px; /* Rounded corners for inputs */
+}
+
+.login-card .btn {
+    border-radius: 4px; /* Rounded corners for button */
+}
