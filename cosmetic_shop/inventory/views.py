@@ -9,6 +9,7 @@ from .forms import createuser,createinventor
 from django.contrib.auth.models import User
 from django.contrib.auth import login,logout,authenticate
 from django.contrib.auth import views as auth_views
+from django.core.paginator import Paginator
 
 # Create your views here.
 
@@ -20,7 +21,7 @@ def registerpage(request):
     if request.method == 'POST':
         form = createuser(request.POST)
         if form.is_valid():
-            form.save()  # Saving the form data to the database
+            form.save()  
             return HttpResponse('User successfully registered')
     else:
         form = createuser()
@@ -37,7 +38,7 @@ def loginpage(request):
         if user is not None:
             login(request, user)
             messages.success(request, 'You have been logged in.')
-            return redirect('main')  
+            return redirect('imain')  
         else:
             messages.error(request, 'Invalid username or password.')
     return render(request, 'login.html')
@@ -79,9 +80,20 @@ def viewpro(request):
     return render(request,'viewpro.html',{'form':pro})
 
 
+
 def allprod(request):
-    c1=products.objects.all()
-    return render(request,'allpro.html',{'c1':c1})
+    search_query = request.GET.get('search', '')
+    entries_per_page = request.GET.get('per-page', 10) 
+    c1 = products.objects.all()
+
+    if search_query:
+        c1 = c1.filter(name__icontains=search_query)
+
+    paginator = Paginator(c1, entries_per_page)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, 'allpro.html', {'page_obj': page_obj, 'search_query': search_query, 'entries_per_page': entries_per_page})
 
 
 def purchase_product(request, id):
@@ -91,7 +103,7 @@ def purchase_product(request, id):
         product.save()
         if product.stock == 1:
             check_stock_and_alert(product)
-        return redirect('view_product', id=product.id)  # Changed to 'view_product'
+        return redirect('view_product', id=product.id)
     else:
         return HttpResponse("Product is out of stock")
     
@@ -110,13 +122,13 @@ def check_stock_and_alert(product):
         print(f"Stock level for {product.name} is {product.stock}, no alert needed.")
 
 def user_details(request, id=None):
-    usr = None  # To store inventordetails instance
-    user_data = None  # To store user (email, username) information
+    usr = None  
+    user_data = None 
     
     if id:
         try:
-            usr = inventordetails.objects.get(id=id)  # Retrieve inventor details
-            user_data = usr.user  # Assuming inventordetails has a ForeignKey to User model
+            usr = inventordetails.objects.get(id=id)  
+            user_data = usr.user  
         except inventordetails.DoesNotExist:
             usr = None
         except User.DoesNotExist:
@@ -128,22 +140,20 @@ def user_details(request, id=None):
             form.save()
     else:
         form = createinventor(instance=usr)
-
-    # Prepare context including both inventor and user data
     context = {
         'form': form,
-        'user': usr,  # The inventor details
-        'username': user_data.username if user_data else None,  # Fetch username
-        'email': user_data.email if user_data else None  # Fetch email
+        'user': usr,  
+        'username': user_data.username if user_data else None,  
+        'email': user_data.email if user_data else None  
     }
     
     return render(request, 'view_user.html', context)
 
 
-def product_detail(request, id):
+def product_details(request, id):
     try:
         product = products.objects.get(id=id)
     except products.DoesNotExist:
-        return redirect('allpro')  # Redirect to all products if the product is not found
+        return redirect('allpro')  
 
     return render(request, 'product_detail.html', {'product': product})

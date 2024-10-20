@@ -7,7 +7,6 @@
     <meta name="description" content="Browse our curated collection of beauty products">
     <title>{% if request.GET.category %}{{ request.GET.category|title }} - {% endif %}Beauty Products | Your Brand</title>
     
-    <!-- Stylesheets -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/filterpro.css' %}">
@@ -17,7 +16,6 @@
 
     <div class="container-fluid py-5">
         <div class="container">
-            <!-- Breadcrumb -->
             <nav aria-label="breadcrumb" class="mb-4">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{% url 'main' %}" class="text-decoration-none">Home</a></li>
@@ -28,23 +26,40 @@
                 </ol>
             </nav>
 
-            <!-- Category Banner -->
             {% if request.GET.category %}
             <div class="category-banner mb-5 position-relative rounded overflow-hidden">
                 <div class="category-image-wrapper">
                     {% with request.GET.category as category %}
                         {% if category == "skincare" %}
-                            <img src="{% static 'img/skincare-banner.webp' %}" alt="Skincare Collection" class="w-100 category-banner-img">
+                        <video class="w-100 category-banner-img" style="height: 300px; object-fit: cover;" autoplay muted loop>
+                            <source src="{% static 'img/skincare.mp4' %}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>                                               
                         {% elif category == "makeup" %}
-                            <img src="{% static 'img/makeup-banner.webp' %}" alt="Makeup Collection" class="w-100 category-banner-img">
+                        <video class="w-100 category-banner-img" style="height: 300px; object-fit: cover;" autoplay muted loop>
+                            <source src="{% static 'img/makeup.mp4' %}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>                                
                         {% elif category == "hair" %}
-                            <img src="{% static 'img/hair-banner.webp' %}" alt="Hair Care Collection" class="w-100 category-banner-img">
+                        <video class="w-100 category-banner-img" style="height: 300px; object-fit: cover;" autoplay muted loop>
+                            <source src="{% static 'img/haircare.mp4' %}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
                         {% elif category == "fragrance" %}
-                            <img src="{% static 'img/fragrance-banner.webp' %}" alt="Fragrance Collection" class="w-100 category-banner-img">
+                        <video class="w-100 category-banner-img" style="height: 300px; object-fit: cover;" autoplay muted loop>
+                            <source src="{% static 'img/perfume.mp4' %}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
                         {% elif category == "tools" %}
-                            <img src="{% static 'img/tools-banner.webp' %}" alt="Beauty Tools Collection" class="w-100 category-banner-img">
+                        <video class="w-100 category-banner-img" style="height: 300px; object-fit: cover;" autoplay muted loop>
+                            <source src="{% static 'img/tools.mp4' %}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
                         {% elif category == "bath" %}
-                            <img src="{% static 'img/bath-banner.webp' %}" alt="Bath & Body Collection" class="w-100 category-banner-img">
+                        <video class="w-100 category-banner-img" style="height: 300px; object-fit: cover;" autoplay muted loop>
+                            <source src="{% static 'img/bath.mp4' %}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
                         {% endif %}
                     {% endwith %}
                 </div>
@@ -55,7 +70,6 @@
             {% endif %}
 
             <div class="row">
-                <!-- Filters Sidebar -->
                 <div class="col-lg-3 mb-4">
                     <div class="card shadow-sm border-0 rounded-3">
                         <div class="card-body">
@@ -94,7 +108,6 @@
                     </div>
                 </div>
 
-                <!-- Products Grid -->
                 <div class="col-lg-9">
                     <div class="d-flex justify-content-between align-items-center mb-4">
                         <h2 class="h4 mb-0">{{ products.count }} Products</h2>
@@ -150,7 +163,6 @@
 
     {% include 'ufooter.html' %}
 
-    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         function sortProducts(value) {
@@ -160,7 +172,6 @@
         }
 
         function addToWishlist(productId) {
-            // Add your wishlist functionality here
             console.log('Added product ' + productId + ' to wishlist');
         }
     </script>

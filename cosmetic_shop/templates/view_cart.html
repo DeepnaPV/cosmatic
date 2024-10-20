@@ -4,79 +4,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Shopping Cart</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'css/view_cart.css'%}">
-    <title>Your Cart</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/view_cart.css' %}">
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
     <header>
         {% include 'unav.html' %}
     </header>
-    
-    <div class="container mt-5">
-        <h2 class="text-center mb-4">Your Cart</h2>
-        
-        {% if cart_items %}
-            <table class="table table-bordered table-hover table-responsive">
-                <thead class="table-light">
-                    <tr>
-                        <th>Product</th>
-                        <th>Image</th>
-                        <th>Quantity</th>
-                        <th>Price</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for item in cart_items %}
-                        <tr>
-                            <td>{{ item.product.name }}</td>
-                            <td><img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="product-image"></td>
-                            <td>
-                                <form method="POST" action="{% url 'update_cart' item.product.id %}">
-                                    {% csrf_token %}
-                                    <div class="input-group">
-                                        <button class="btn btn-outline-secondary" type="submit" name="action" value="decrement">-</button>
-                                        <input type="number" name="quantity" class="form-control text-center" value="{{ item.quantity }}" min="1" readonly>
-                                        <button class="btn btn-outline-secondary" type="submit" name="action" value="increment">+</button>
-                                    </div>
-                                </form>
-                            </td>
-                            <td>${{ item.product.price|floatformat:2 }}</td>
-                            <td>
-                                <form method="POST" action="{% url 'remove_from_cart' item.product.id %}">
-                                    {% csrf_token %}
-                                    <button type="submit" class="btn btn-danger btn-sm">Remove</button>
-                                </form>
-                            </td>
-                        </tr>
-                    {% endfor %}
-                    <tr class="table-success">
-                        <td colspan="4" class="text-end total-price"><strong>Total Price:</strong></td>
-                        <td class="total-price"><strong>${{ total_price|floatformat:2 }}</strong></td>
-                    </tr>
-                </tbody>  
-            </table>
 
-            <!-- Buy Now Button -->
-            <div class="text-center mt-4">
-                <a href="{% url 'checkout' cart_items.0.product.id %}" class="btn btn-success">BUY NOW</a>
-            </div>
+    <main class="flex-grow-1">
+        <div class="container my-5">
+            <h1 class="text-center mb-4">Your Shopping Cart</h1>
 
-        {% else %}
-            <p class="empty-cart">Your cart is empty.</p>
-        {% endif %}
-        
-        <div class="text-center mt-4">
-            <a href="{% url 'filter_products' %}" class="btn btn-custom">Continue Shopping</a>
+            {% if cart_items %}
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover align-middle">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Product</th>
+                                <th>Image</th>
+                                <th>Quantity</th>
+                                <th>Price</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in cart_items %}
+                                <tr>
+                                    <td>{{ item.product.name }}</td>
+                                    <td>
+                                        <a href="{% url 'product_detail' item.product.id %}" title="View {{ item.product.name }} details">
+                                            <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="product-image rounded">
+                                        </a>
+                                    </td>                                    <td>
+                                        <form method="POST" action="{% url 'update_cart' item.product.id %}" class="d-flex align-items-center">
+                                            {% csrf_token %}
+                                            <button class="btn btn-outline-secondary btn-sm" type="submit" name="action" value="decrement">
+                                                <i class="fas fa-minus"></i>
+                                            </button>
+                                            <input type="number" name="quantity" class="form-control form-control-sm mx-2 text-center" value="{{ item.quantity }}" min="1" style="width: 60px;" readonly>
+                                            <button class="btn btn-outline-secondary btn-sm" type="submit" name="action" value="increment">
+                                                <i class="fas fa-plus"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                    <td>${{ item.product.price|floatformat:2 }}</td>
+                                    <td>
+                                        <form method="POST" action="{% url 'remove_from_cart' item.product.id %}">
+                                            {% csrf_token %}
+                                            <button type="submit" class="btn btn-danger btn-sm">
+                                                <i class="fas fa-trash-alt"></i> Remove
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                        <tfoot>
+                            <tr class="table-dark">
+                                <td colspan="4" class="text-end total-price"><strong>Total:</strong></td>
+                                <td class="total-price"><strong>${{ total_price|floatformat:2 }}</strong></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+
+                <div class="d-flex justify-content-between mt-4">
+                    <a href="{% url 'filter_products' %}" class="btn btn-custom">
+                        <i class="fas fa-arrow-left me-2"></i> Continue Shopping
+                    </a>
+                    <a href="{% url 'checkout' cart_items.0.product.id %}" class="btn btn-success">
+                        <i class="fas fa-shopping-cart me-2"></i> Proceed to Checkout
+                    </a>
+                </div>
+            {% else %}
+                <p class="empty-cart">Your cart is empty. <a href="{% url 'filter_products' %}">Start shopping</a></p>
+            {% endif %}
         </div>
-    </div>
-    
-    <footer>
+    </main>
+
+    <footer class="mt-auto">
         {% include 'ufooter.html' %}
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-

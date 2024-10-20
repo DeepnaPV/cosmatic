@@ -18,29 +18,26 @@
           <div class="carousel-item active">
             <img src="{% static 'img/uhome1.jpg'%}" class="d-block w-100">
             <div class="carousel-caption ">
-              <h3>Welcome</h3>
-              <h1 >The Best Coffee Testing Experience</h1>
-              <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-              <p><a href="#" class="btn btn-primary p-3 px-xl-4 py-xl-3">Order Now</a> <a href="#" class="btn btn-white btn-outline-white p-3 px-xl-4 py-xl-3">View Menu</a></p>
+                <h3>Welcome to Pure Blush</h3>
+                <h1>Discover Your Radiant Beauty</h1>
+                <p>Experience our luxurious range of skincare and cosmetic products designed to enhance your natural beauty.</p>
             </div>
           </div>
           <div class="carousel-item " >
             <img src="{% static 'img/uhome2.jpg'%}" class="d-block w-100">
             <div class="carousel-caption ">
-              <h3>Welcome</h3>
-              <h1>Amazing Taste &amp; Beautiful Place</h1>
-              <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>                  
-              <p><a href="#" class="btn btn-primary p-3 px-xl-4 py-xl-3">Order Now</a> <a href="#" class="btn btn-white btn-outline-white p-3 px-xl-4 py-xl-3">View Menu</a></p>
+                <h3>Indulge in Luxury</h3>
+                <h1>Premium Skincare Solutions</h1>
+                <p>Our scientifically formulated products are designed to nourish and rejuvenate your skin, revealing your true beauty.</p>                             
             </div>
 
           </div>
           <div class="carousel-item">
             <img src="{% static 'img/uhome3.jpg'%}" class="d-block w-100">
             <div class="carousel-caption ">
-              <h3>Welcome</h3>
-              <h1 >Creamy Hot and Ready to Serve</h1>   
-              <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>                 
-              <p><a href="#" class="btn btn-primary p-3 px-xl-4 py-xl-3">Order Now</a> <a href="#" class="btn btn-white btn-outline-white p-3 px-xl-4 py-xl-3">View Menu</a></p>
+                <h3>Beauty Reimagined</h3>
+                <h1>Innovative Cosmetic Formulas</h1>   
+                <p>Explore our cutting-edge makeup line, crafted to enhance your features and boost your confidence.</p>                                  
             </div>
 
           </div>
@@ -229,26 +226,24 @@ let currentIndex = 0;
 
 function showSlide(index) {
     const totalSlides = slides.length;
-    // Wrap around logic
     if (index >= totalSlides) {
-        currentIndex = 0; // Wrap to first slide
+        currentIndex = 0; 
     } else if (index < 0) {
-        currentIndex = totalSlides - 1; // Wrap to last slide
+        currentIndex = totalSlides - 1; 
     } else {
         currentIndex = index;
     }
 
-    // Move the slider container
-    const offset = -currentIndex * 100; // Each slide takes full width
-    document.querySelector('.container').style.transform = `translateX(${offset}%)`; // Change .slider-container to .container
+    const offset = -currentIndex * 100; 
+    document.querySelector('.container').style.transform = `translateX(${offset}%)`; 
 }
 
 document.getElementById('nextBtn').addEventListener('click', () => {
-    showSlide(currentIndex + 1); // Move to the next slide
+    showSlide(currentIndex + 1); 
 });
 
 document.getElementById('prevBtn').addEventListener('click', () => {
-    showSlide(currentIndex - 1); // Move to the previous slide
+    showSlide(currentIndex - 1); 
 });
 
 </script>

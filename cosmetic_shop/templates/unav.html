@@ -1,21 +1,18 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'css/unav.css'%}">
-<nav class="navbar navbar-expand-lg  bg-dark  fixed-top ;">
-    <div class="container-fluid ">
-      <a class="navbar-brand" href="#">
-        <img
-        src="{% static 'img/logoo.png'%}"
-        height="55"
-        alt="MDB Logo"
-        loading="lazy"
-      />      </a>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<nav class="navbar navbar-expand-lg bg-dark fixed-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <img src="{% static 'img/logoo.png'%}" height="55" alt="MDB Logo" loading="lazy" />
+        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse " id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0  mx-auto">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-auto">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page"  href="{% url 'main' %}" style="color: white;font-size: 20px;">HOME</a>
+                    <a class="nav-link active" aria-current="page" href="{% url 'main' %}" style="color: white;font-size: 20px;">HOME</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" aria-expanded="false" style="color: white; font-size: 20px;">
@@ -63,25 +60,42 @@
                         </div>
                     </div>
                 </li>
-                 
                 <li class="nav-item">
-                  <a class="nav-link" href="#" style="color: white; font-size: 20px;">SERVICES</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#" style="color: white; font-size: 20px;">BLOG</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link"  href="{% url 'about' %}" style="color: white; font-size: 20px;">ABOUT</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#" style="color: white; font-size: 20px;">SHOP</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#" style="color: white; font-size: 20px;">CONTACT US</a>
-      </li>
-     
-
-          </ul>
+                    <a class="nav-link" href="#" style="color: white; font-size: 20px;">SERVICES</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'about' %}" style="color: white; font-size: 20px;">BLOG</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'about' %}" style="color: white; font-size: 20px;">ABOUT</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" style="color: white; font-size: 20px;">SHOP</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'contact' %}" style="color: white; font-size: 20px;">CONTACT US</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav">
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}" style="color: white; font-size: 20px;">LOGOUT</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}" style="color: white; font-size: 20px;">LOGIN</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'register' %}" style="color: white; font-size: 20px;">SIGN UP</a>
+                    </li>
+                {% endif %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'view_cart' %}" style="color: white; font-size: 20px;">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="badge bg-danger">{{ cart_count }}</span>
+                    </a>
+                </li>
+            </ul>
         </div>
     </div>
 </nav>

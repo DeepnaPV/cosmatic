@@ -6,7 +6,7 @@ from django.urls import  include
 from django.contrib.auth import views as auth_views
 
 urlpatterns=[
-    path('home',views.main, name='main'),
+    path('home',views.main, name='imain'),
     path('addpro',views.addpro,name='addpro'),
     path('update/<int:id>',views.updatepro,name='updatepro'),
     path('deletepro/<int:id>',views.deletepro,name='delpro'),
@@ -21,8 +21,7 @@ urlpatterns=[
     path('accounts/reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name='password_reset_confirm.html'), name='password_reset_confirm'),
     path('accounts/reset/done/', auth_views.PasswordResetCompleteView.as_view(template_name='password_reset_complete.html'), name='password_reset_complete'),
     path('logout',views.logoutpage,name='logout'),
-    path('product/<int:id>/', views.product_detail, name='product_detail'),
-
+    path('product/<int:id>/', views.product_details, name='product_details'),
 
 ]
 urlpatterns+= static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

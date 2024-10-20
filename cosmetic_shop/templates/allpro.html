@@ -17,88 +17,85 @@
         <div class="row flex-nowrap" style="height: 100vh;">
             {% include 'sidebar.html' %}
             <div class="col py-3">
-                <div class="main container ">
+                <div class="main container">
                     <div class="container mt-3 bg-light p-4 rounded shadow">
                         <div class="d-flex justify-content-between align-items-center">
-                            <h2 class="mb-0">Total Products: {{ c1|length }}</h2>
+                            <h2 class="mb-0">Total Products: {{ page_obj.paginator.count }}</h2>
                             <a href="{% url 'addpro' %}" class="btn btn-success mt-0">Add Product</a>
-                        </div>                        
-                        <div class="datatable-wrapper ">
+                        </div>
+                        <form method="GET" action="{% url 'allpro' %}" class="mb-3">
                             <div class="datatable-top d-flex justify-content-between mb-3">
                                 <div class="datatable-dropdown">
                                     <label>
-                                        <select class="datatable-selector" name="per-page">
-                                            <option value="5">5</option>
-                                            <option value="10" selected="">10</option>
-                                            <option value="15">15</option>
-                                            <option value="-1">All</option>
+                                        <select class="datatable-selector" name="per-page" onchange="this.form.submit()">
+                                            <option value="5" {% if entries_per_page == '5' %}selected{% endif %}>5</option>
+                                            <option value="10" {% if entries_per_page == '10' %}selected{% endif %}>10</option>
+                                            <option value="15" {% if entries_per_page == '15' %}selected{% endif %}>15</option>
+                                            <option value="-1" {% if entries_per_page == '-1' %}selected{% endif %}>All</option>
                                         </select> entries per page
                                     </label>
                                 </div>
                                 <div class="datatable-search">
-                                    <input class="datatable-input form-control" placeholder="Search..." type="search" name="search" title="Search within table">
+                                    <input class="datatable-input form-control" placeholder="Search..." type="search" name="search" title="Search within table" value="{{ search_query }}">
+                                    <button type="submit" class="btn btn-primary">Search</button>
                                 </div>
                             </div>
-                            <div class="datatable-container">
-                                <table class="table table-bordered table-striped datatable">
-                                    <thead class="datatable-header">
-                                        <tr>
-                                            <th data-sortable="true"><b>Name</b></th>
-                                            <th data-sortable="true"><b>Brand</b></th>
-                                            <th data-sortable="true"><b>Stock</b></th>
-                                            <th data-sortable="true"><b>Price</b></th>
-                                            <th data-sortable="true"><b>Actions</b></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {% for i in c1 %}
-                                        <tr>
-                                            <td>{{ i.name }}</td>
-                                            <td>{{ i.brand }}</td>
-                                            <td>{{ i.stock }}</td>
-                                            <td>{{ i.price }}</td>
-                                            <td>
-                                                <a href="{% url 'product_detail' i.id %}" class="btn btn-primary btn-sm">View</a>
-                                                <a href="{% url 'updatepro' i.id %}" class="btn btn-warning btn-sm">Edit</a>
-                                                <a href="{% url 'delpro' i.id %}" class="btn btn-danger btn-sm">Delete</a>
-                                            </td>
-                                        </tr>
-                                        {% empty %}
-                                        <tr>
-                                            <td colspan="3">No products available.</td>
-                                        </tr>
-                                        {% endfor %}
-                                    </tbody>
-                                </table>
+                        </form>
+                        <div class="datatable-container">
+                            <table class="table table-bordered table-striped datatable">
+                                <thead class="datatable-header">
+                                    <tr>
+                                        <th data-sortable="true"><b>Name</b></th>
+                                        <th data-sortable="true"><b>Brand</b></th>
+                                        <th data-sortable="true"><b>Stock</b></th>
+                                        <th data-sortable="true"><b>Price</b></th>
+                                        <th data-sortable="true"><b>Actions</b></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for i in page_obj %}
+                                    <tr>
+                                        <td>{{ i.name }}</td>
+                                        <td>{{ i.brand }}</td>
+                                        <td>{{ i.stock }}</td>
+                                        <td>{{ i.price }}</td>
+                                        <td>
+                                            <a href="{% url 'product_details' i.id %}" class="btn btn-primary btn-sm">View</a>
+                                            <a href="{% url 'updatepro' i.id %}" class="btn btn-warning btn-sm">Edit</a>
+                                            <a href="{% url 'delpro' i.id %}" class="btn btn-danger btn-sm">Delete</a>
+                                        </td>
+                                    </tr>
+                                    {% empty %}
+                                    <tr>
+                                        <td colspan="5">No products available.</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="datatable-bottom d-flex justify-content-between align-items-center mt-3">
+                            <div class="datatable-info">
+                                Showing {{ page_obj.start_index }} to {{ page_obj.end_index }} of {{ page_obj.paginator.count }} entries
                             </div>
-                            <div class="datatable-bottom d-flex justify-content-between align-items-center mt-3">
-                                <div class="datatable-info">Showing 1 to {{ c1|length }} of {{ c1|length }} entries</div>
-                                <nav class="datatable-pagination">
-                                    <ul class="datatable-pagination-list">
-                                        <li class="datatable-pagination-list-item datatable-hidden datatable-disabled">
-                                            <button data-page="1" aria-label="Page 1">‹</button>
-                                        </li>
-                                        <li class="datatable-pagination-list-item datatable-active">
-                                            <button data-page="1" aria-label="Page 1">1</button>
-                                        </li>
-                                        <li class="datatable-pagination-list-item">
-                                            <button data-page="2" aria-label="Page 2">2</button>
-                                        </li>
-                                        <li class="datatable-pagination-list-item datatable-ellipsis datatable-disabled">
-                                            <button>…</button>
-                                        </li>
-                                        <li class="datatable-pagination-list-item">
-                                            <button data-page="10" aria-label="Page 10">10</button>
-                                        </li>
-                                        <li class="datatable-pagination-list-item">
-                                            <button data-page="2" aria-label="Page 2">›</button>
-                                        </li>
-                                    </ul>
-                                </nav>
-                            </div>
+                            <nav class="datatable-pagination">
+                                <ul class="datatable-pagination-list">
+                                    {% if page_obj.has_previous %}
+                                        <li><a href="?page={{ page_obj.previous_page_number }}&search={{ search_query }}&per-page={{ entries_per_page }}">‹</a></li>
+                                    {% endif %}
+                                    {% for num in page_obj.paginator.page_range %}
+                                        {% if page_obj.number == num %}
+                                            <li class="active"><a href="#">{{ num }}</a></li>
+                                        {% else %}
+                                            <li><a href="?page={{ num }}&search={{ search_query }}&per-page={{ entries_per_page }}">{{ num }}</a></li>
+                                        {% endif %}
+                                    {% endfor %}
+                                    {% if page_obj.has_next %}
+                                        <li><a href="?page={{ page_obj.next_page_number }}&search={{ search_query }}&per-page={{ entries_per_page }}">›</a></li>
+                                    {% endif %}
+                                </ul>
+                            </nav>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>

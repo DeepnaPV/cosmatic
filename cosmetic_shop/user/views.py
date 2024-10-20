@@ -2,8 +2,11 @@ from django.shortcuts import render,redirect,get_object_or_404
 from inventory.models import products
 from .models import CartItem 
 from django.contrib import messages
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate,logout
 from .forms import UserRegistrationForm, CustomerForm
+from django.core.mail import send_mail
+from django.contrib.auth.models import User
+from django.conf import settings
 
 
 # Create your views here.
@@ -38,13 +41,17 @@ def user_login(request):
             login(request, user)
             return redirect('main')  
         else:
-            # Return an 'invalid login' error message.
-            ...
+           error_message = "Invalid username or password."
+           return render(request, 'ulogin.html', {'error': error_message})
 
     return render(request, 'ulogin.html')
 
 def about(request):
     return render(request,'about.html')
+
+
+def contact(request):
+    return render(request,'contactus.html')
 
 def main(request):
     return render(request,'uhome.html')
@@ -53,24 +60,17 @@ from django.shortcuts import render
 from inventory.models import products
 
 def filter_products(request):
-    # Get all unique categories for the dropdown
     categories = products.objects.values_list('category', flat=True).distinct()
-    
-    # Get category from URL parameter
     category = request.GET.get('category', None)
 
-    # Get price range from URL parameters
     min_price = request.GET.get('min_price')
     max_price = request.GET.get('max_price')
 
-    # Start with all products
     filtered_products = products.objects.all()
 
-    # Filter products based on category
     if category and category != 'all':
         filtered_products = filtered_products.filter(category=category)
 
-    # Filter products based on price range
     if min_price:
         filtered_products = filtered_products.filter(price__gte=min_price)
     if max_price:
@@ -91,7 +91,7 @@ def detail(request, id):
     try:
         product = products.objects.get(id=id)
     except products.DoesNotExist:
-        return redirect('allpro')  # Redirect to all products if the product is not found
+        return redirect('allpro') 
 
     return render(request, 'uprodetail.html', {'product': product})
 
@@ -110,7 +110,7 @@ def add_to_cart(request, product_id):
     else:
         messages.warning(request, "You need to be logged in to add items to your cart.")
     
-    return redirect('filter_products')  # Redirect to the products page or wherever you prefer
+    return redirect('filter_products')  
 
 def view_cart(request):
     if request.user.is_authenticated:
@@ -119,7 +119,7 @@ def view_cart(request):
         return render(request, 'view_cart.html', {'cart_items': cart_items, 'total_price': total_price})
     else:
         messages.warning(request, "You need to be logged in to view your cart.")
-        return redirect('ulogin')
+        return redirect('login')
 
 def update_cart(request, product_id):
     item = get_object_or_404(CartItem, product_id=product_id, user=request.user)
@@ -134,7 +134,6 @@ def update_cart(request, product_id):
                 item.quantity -= 1
                 item.save()
             else:
-                # Optionally, remove the item if quantity reaches zero
                 item.delete()
     
     return redirect('view_cart')
@@ -142,22 +141,56 @@ def update_cart(request, product_id):
 def remove_from_cart(request, product_id):
     item = get_object_or_404(CartItem, product_id=product_id, user=request.user)
     item.delete()
-    return redirect('view_cart')  # Redirect to the cart page
-
+    return redirect('view_cart') 
 
 def checkout_view(request, product_id):
-    # Retrieve the product using the provided product_id
     product = get_object_or_404(products, id=product_id)
     
-    # Check if the request method is POST for handling form submission
     if request.method == 'POST':
-        # Handle payment processing here
-        # You can integrate with a payment gateway API
-        # For now, we will just simulate a successful payment
-
-        # After payment processing
-        # Redirect to a success page or render a success template
         return render(request, 'payment_success.html', {'product': product})
 
-    # If GET request, render the checkout page with the product details
     return render(request, 'check_out.html', {'product': product})
+
+def logoutpage(request):
+    logout(request)
+    return redirect('login')
+
+def purchase_product(request, id):
+    product = get_object_or_404(products, id=id)
+
+    if request.method == 'POST':
+        if product.stock > 0:
+            product.stock -= 1
+            product.save()
+
+            if product.stock == 0:
+                check_stock_and_alert(product)
+
+            messages.success(request, f"You have successfully purchased {product.name}.")
+            return redirect('product_details', id=product.id) 
+        else:
+            messages.error(request, "Sorry, this product is out of stock.")
+            return redirect('product_details', id=product.id)
+
+    return render(request, 'purchase_product.html', {'product': product})
+
+
+def check_stock_and_alert(product):
+    recipient_list = User.objects.values_list('email', flat=True)
+    
+    subject = f"Low Stock Alert: {product.name}"
+    message = f"The stock for {product.name} has reached 0. Please restock soon."
+    
+    send_mail(subject, message, settings.EMAIL_HOST_USER, recipient_list, fail_silently=False)
+    print(f"Low stock alert for {product.name} sent successfully")
+
+def payment_success(request, order_id):
+    try:
+        order = order.objects.get(id=order_id, user=request.user)
+        context = {
+            'order': order,
+            'user': request.user,
+        }
+        return render(request, 'user/payment_success.html', context)
+    except order.DoesNotExist:
+        return redirect('shop')
