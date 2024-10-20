@@ -186,33 +186,39 @@
         </div>
     </div>
     <div class="sub">
-        <div class="newsletter-section" id="newsletter-section">
-            <div class="container">
-                <div class="section-content-wrapper">
-                    <div class="section-content">
-                        <h3 class="title">Join us</h3>
-                        <div class="description">
-                            <p>Subscribe to our newsletter</p>
-                        </div>
-                        <div class="section-form-wrapper">
-                            <form method="post" action="/contact#NewsletterSection" id="NewsletterSection" accept-charset="UTF-8" class="newsletter-block">
-                                <input type="hidden" name="form_type" value="customer">
-                                <input type="hidden" name="utf8" value="✓">
-                                <input type="hidden" name="contact[tags]" value="newsletter">
-                                <div class="newsletter-form__field-wrapper">
-                                    <div class="field">
-                                        <label class="field__label" for="NewsletterForm-email">Your email</label>
-                                        <input id="NewsletterForm-email" type="email" name="contact[email]" class="field__input" required placeholder="Enter your email address">
-                                    </div>
-                                    <button type="submit" class="button newsletter-form__button">Subscribe</button>
+        <div class="newsletter-section">
+            <div class="section-content-wrapper">
+                <div class="section-content">
+                    <h3 class="title">Join our Beauty Community</h3>
+                    <div class="description">
+                        <p>Subscribe for exclusive offers and beauty tips</p>
+                    </div>
+                    <div class="section-form-wrapper">
+                        <form method="post" action="/contact#NewsletterSection" id="NewsletterSection" class="newsletter-block">
+                            <input type="hidden" name="form_type" value="customer">
+                            <input type="hidden" name="utf8" value="✓">
+                            <input type="hidden" name="contact[tags]" value="newsletter">
+                            <div class="newsletter-form__field-wrapper">
+                                <div class="field">
+                                    <label class="field__label" for="NewsletterForm-email">Your email</label>
+                                    <input 
+                                        id="NewsletterForm-email" 
+                                        type="email" 
+                                        name="contact[email]" 
+                                        class="field__input" 
+                                        required 
+                                        placeholder="Enter your email address"
+                                    >
                                 </div>
-                            </form>
-                        </div>
+                                <button type="submit" class="newsletter-form__button">
+                                    Subscribe
+                                </button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
-        
     </div>
     <div>
         {% include 'ufooter.html' %}
