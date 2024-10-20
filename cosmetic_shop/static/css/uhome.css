@@ -3,8 +3,8 @@
     margin: 0;
 }
 .carousel-inner img {
-    height: 600px; /* Adjust this value as needed */
-    object-fit: cover; /* Ensures the image covers the area without distortion */
+    height: 600px;  
+    object-fit: cover; 
 }
 .carousel-caption {
     top: 40%;
@@ -141,8 +141,8 @@
     margin-top: 170px;         
 }
 .custom-image {
-    height: 150px;  /* Set height to 30 pixels */
-    width: auto;   /* Maintain aspect ratio */
+    height: 150px;  
+    width: auto;   
 }
 .sub{
     background-color: #feebe7;
@@ -214,17 +214,16 @@
 .newsletter-form__button:hover {
     background: #1d4ed8;
     transform: translateY(-1px);
-}
+} 
 
-/* Media queries for responsiveness */
 @media (max-width: 500px) { 
     .slider-slide {
-        min-width: 50%; /* Two cards in a row (approximately) */
+        min-width: 50%; 
     }
 }
 
 @media (max-width: 480px) {
     .card {
-        flex: 1 0 90%; /* One card per slide on very small screens */
+        flex: 1 0 90%; 
     }
 }
